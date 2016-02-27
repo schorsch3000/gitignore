@@ -23,5 +23,5 @@ clean:
 githubrelease: clean test
 	#todo
 tag:
-	git status
 	git tag $(cat .semver)
+	git push --tags
