@@ -9,7 +9,7 @@ container:
 interactive_test: build
 	docker run -ti -v "${PWD}:/WORK" gitignore /bin/bash
 
-test: build
+test: clean build
 	docker run -ti -v "${PWD}:/WORK" gitignore /bin/bash /WORK/test.sh
 	@grep -q ERROR test/error || (echo FAIL: searching for an non existent value doesn\'t create an error && exit 2)
 	@grep -q "'java'" test/ACjava || (echo FAIL: Autocompleting  java doesn\'t show java && exit 2)
@@ -18,10 +18,11 @@ test: build
 	@echo Tests run fine.
 
 clean:
-	docker rmi -f gitignore
+	docker rmi -f gitignore || true
+	rm -y *.deb || true
 
-githubrelease: clean test
+githubrelease: test
 	#todo
 tag:
-	git tag $(cat .semver)
+	git tag $$(cat .semver)
 	git push --tags

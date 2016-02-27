@@ -3,7 +3,12 @@ gitignore cli with autocompletion powered by gitignore.io.
 
 ![example screen session](example.gif)
 
-## Setup
+## Setup by installing a .deb
+
+Just download an install the .deb file from the latest [release](https://github.com/schorsch3000/gitignore/releases/)
+
+
+## Setup Manually
 
 You need to have a php-cli interpreter installed, if you running an apt based distro this will do the job:
 
@@ -11,11 +16,6 @@ You need to have a php-cli interpreter installed, if you running an apt based di
 $ sudo install php5-cli
 ```
 
-or even
-
-``` sh
-$ sudo install php7-cli
-```
 
 Now you need to get gitignore into you path:
 
