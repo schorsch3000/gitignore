@@ -1,0 +1,23 @@
+#!/bin/bash
+test -d package && rm -rf package
+mkdir -p package/usr/local/bin
+cp gitignore.php package/usr/local/bin/gitignore
+chown root:root package/usr/local/bin/gitignore
+
+mkdir -p package/etc/bash_completion.d/
+cp autocomplete.sh package/etc/bash_completion.d/gitignore.sh
+chown root:root package/etc/bash_completion.d/gitignore.sh
+
+mkdir -p package/DEBIAN
+echo 9 >package/DEBIAN/compat
+
+echo Package: gitignore > package/DEBIAN/control
+echo Architecture: all >> package/DEBIAN/control
+echo Maintainer: Dirk Heilig >> package/DEBIAN/control
+echo Depends: php5-cli, ca-certificates >> package/DEBIAN/control
+echo Priority: optional >> package/DEBIAN/control
+echo Version: $(cat .semver) >> package/DEBIAN/control
+echo Description: gitignore cli with autocompleteion powered by gitignore.io. >> package/DEBIAN/control
+dpkg-deb -b package/ gitignore-$(cat .semver).deb
+rm -rf package
+chmod +w *.deb

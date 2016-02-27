@@ -1,5 +1,5 @@
 # gitignore
-gitignore cli with autocompleteion powered by gitignore.io.
+gitignore cli with autocompletion powered by gitignore.io.
 
 ![example screen session](example.gif)
 
